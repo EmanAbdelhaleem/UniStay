@@ -1,7 +1,8 @@
-import 'dart:js';
+import 'package:flutter_application_1/main.dart';
+//import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+//import 'package:flutter/widgets.dart';
 import 'dart:async';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
