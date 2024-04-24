@@ -24,6 +24,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
   String _phoneNumber = '';
   PhoneNumber _internationalPhoneNumber = PhoneNumber(isoCode: '');
 
@@ -45,9 +46,16 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 13.0),
               _buildCorrectionText(),
               SizedBox(height: 13.0),
-              _buildPhoneNumberField("Phone Number"),
-              SizedBox(height: 200.0),
-              _BuildLoginButton()
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildPhoneNumberField("Phone Number"),
+                      SizedBox(height: 200.0),
+                      _BuildLoginButton()
+                    ],
+                  )),
             ],
           ),
         ),
@@ -57,9 +65,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _BuildGobackIcon() {
     return IconButton(
-        onPressed: (){
+        onPressed: () {
+          Navigator.of(context).pushNamed('login');
         },
-    icon: Icon(Icons.arrow_back,size: 30,));
+        icon: Icon(
+          Icons.arrow_back,
+          size: 30,
+        ));
   }
 
   Widget _buildLoginWithText() {
@@ -88,10 +100,7 @@ class _LoginPageState extends State<LoginPage> {
     return Text(
       'Write your phone number correctly',
       style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-        color: Color(0xff9E9E9E),
-            fontSize: 13.0
-      )),
+          textStyle: TextStyle(color: Color(0xff9E9E9E), fontSize: 13.0)),
     );
   }
 
@@ -109,7 +118,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget _BuildLoginButton() {
     return ElevatedButton(
       onPressed: () {
-        print('Phone Number: $_phoneNumber');
+        if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.save();
+        }
+        Navigator.of(context).pushNamed('profile');
       },
       child: Text(
         "Login",
@@ -129,15 +141,15 @@ class _LoginPageState extends State<LoginPage> {
   InputDecoration decorateTextFields(String hint) {
     return InputDecoration(
       hintText: hint,
-      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      contentPadding: EdgeInsets.symmetric(vertical: 17, horizontal: 10),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Color(0xff9E9E9E),
-        ),
-      ),
+          borderSide: BorderSide(
+            color: Color(0xff9E9E9E),
+          ),
+          borderRadius: BorderRadius.circular(10.0)),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.blueAccent),
-      ),
+          borderSide: BorderSide(color: Colors.blueAccent),
+          borderRadius: BorderRadius.circular(10.0)),
     );
   }
 }

@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +11,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: HomePage(),
-        ) // Set HomePage as the home screen
+        )
         );
   }
 }
@@ -43,17 +40,15 @@ Widget image_part() {
       ),
       // Foreground image with positioning
       Positioned(
-        top: 100, // Adjust position from top edge
-        left: 130, // Adjust position from left edge
+        top: 100,
+        left: 130,
         child: Image.asset(
           'assets/logo1.png',
-        ), // Replace with your image path
+        ),
       ),
 
-      // Text overlay with positioning and styling
       Positioned(
-        top: 110, // Adjust position
-        //left: (MediaQuery.of(context).size.width - textWidth) / 2, // Calculate horizontal centering
+        top: 110,
         child: Container(
           width: 420,
           height: 200,
@@ -91,8 +86,8 @@ class HomePage extends StatelessWidget {
       image_part(),
       Positioned.fill(
         top: 400,
-        bottom: 0.0, // Position at bottom edge
-        left: 0.0, // Span full width (left edge)
+        bottom: 0.0,
+        left: 0.0,
         right: 0.0,
         child: Container(
           height: 500,
@@ -164,8 +159,9 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       onPressed: () {
-        // Add functionality here (e.g., handle social login)
-        print('Social login button pressed'); // Placeholder for now
+        text == 'login with mobile number'
+            ? Navigator.of(context).pushNamed('login_with_phone')
+            : null;
       },
       icon: Icon(
         icon,
@@ -196,8 +192,7 @@ class SignUpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        // Add functionality here (e.g., navigate to sign-up page)
-        print('Sign Up button pressed'); // Placeholder for now
+        Navigator.of(context).pushNamed('signup');
       },
       child: Text(
         'sign up',

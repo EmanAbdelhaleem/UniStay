@@ -1,18 +1,30 @@
 import 'package:flutter_application_1/main.dart';
-//import 'dart:js';
-
+import 'package:flutter_application_1/login.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/profile.dart';
+import 'package:flutter_application_1/signUp.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'EditProfile.dart';
+import 'FavouritePage.dart';
+import 'login_with_phone.dart';
 
 main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/',
+    initialRoute: 'logoScreen',
     routes: {
-      '/': (context) => FirstScreen(),
-      '/second': (context) => SecondScreen(),
+      'logoScreen': (context) => FirstScreen(),
+      'onBoarding': (context) => SecondScreen(),
+      'login': (context) => HomePage(),
+      'signup': (context) => SignUpPage(),
+      'login_with_phone': (context) => LoginPage(),
+      'profile' : (context) => ProfilePage(),
+      'editProfile' : (context) => EditProfilePage(),
+      'favourite' : (context) => FavouritePage(),
+
     },
   ));
 }
@@ -43,39 +55,50 @@ Widget buildPage(String imagePath, String title, String subtitle,
               Padding(
                   padding: EdgeInsets.only(top: 50.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
                         padding: EdgeInsets.all(10.0), // Add padding here
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Log in',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                        child: Builder(builder: (context) {
+                          return ElevatedButton(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed('login'),
+                            child: Text(
+                              'Log in',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0),
                             ),
-                          ),
-                        ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                minimumSize: Size(150, 55)),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: EdgeInsets.all(10.0), // Add padding here
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.blue),
+                        child: Builder(builder: (context) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed('signup');
+                            },
+                            child: Text(
+                              'Sign up',
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 20.0),
                             ),
-                          ),
-                        ),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                side: BorderSide(color: Colors.blue),
+                              ),
+                              minimumSize: Size(150, 55),
+                            ),
+                          );
+                        }),
                       ),
                     ],
                   ))
@@ -83,18 +106,25 @@ Widget buildPage(String imagePath, String title, String subtitle,
           ],
         ),
       ),
-      Positioned(
-        top: 20.0,
-        right: 20.0,
-        child: FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text('Skip'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          highlightElevation: 0,
-          hoverElevation: 0,
-        ),
-      ),
+      if (!isLastPage) ...[
+        Positioned(
+          top: 120.0,
+          right: 25.0,
+          child: Builder(builder: (context) {
+            return FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.of(context).pushNamed('login');
+              },
+              label: Text('skip',
+                  style: TextStyle(fontSize: 20, color: Colors.grey[500])),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              highlightElevation: 0,
+              hoverElevation: 0,
+            );
+          }),
+        )
+      ],
     ],
   );
 }
@@ -103,7 +133,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/second');
+      Navigator.pushReplacementNamed(context, 'onBoarding');
     });
     return Scaffold(
       body: Center(
@@ -150,7 +180,7 @@ class SecondScreen extends StatelessWidget {
                 child: SmoothPageIndicator(
                   controller: _pageController,
                   count: 3, // Number of pages
-                  effect: ExpandingDotsEffect(),
+                  effect: ExpandingDotsEffect(dotHeight: 7, dotWidth: 11),
                 )),
           ],
         ),

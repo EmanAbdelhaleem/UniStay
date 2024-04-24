@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,16 +39,15 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // Wraps entire body for scrolling
         child: Padding(
-          padding: const EdgeInsets.all(20.0), // Adjust padding if needed
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 5.0),
+              SizedBox(height: 10.0),
               _buildWelcomeText(),
               SizedBox(height: 10.0),
-              _buildLogoImage(), // Check image size
+              _buildLogoImage(),
               SizedBox(height: 20.0),
               _buildCreateAccountText(),
               SizedBox(height: 20.0),
@@ -89,15 +87,20 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          inputField(label: "Full Name", textField: _buildFullNameField("Eman Abdehaleem")),
+          inputField(
+              label: "Full Name",
+              textField: _buildFullNameField("Eman Abdehaleem")),
           SizedBox(height: 10.0),
           _buildPhoneNumberField("Phone number"),
           SizedBox(height: 10.0),
-          inputField(label: "Email", textField: _buildEmailField("emanabdelhaleem@gmail.com")),
+          inputField(
+              label: "Email",
+              textField: _buildEmailField("emanabdelhaleem@gmail.com")),
           SizedBox(height: 10.0),
-          inputField(label: "Password",textField: _buildPasswordTextField("enter your password")),
+          inputField(
+              label: "Password",
+              textField: _buildPasswordTextField("enter your password")),
           SizedBox(height: 5.0),
-
           _buildTermsCheckbox(),
           SizedBox(height: 20.0),
           _BuildSignUpButton(),
@@ -122,16 +125,20 @@ class _SignUpPageState extends State<SignUpPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         labelTextFields(hint),
-        SizedBox(height: 5.0,),
+        SizedBox(
+          height: 5.0,
+        ),
         InternationalPhoneNumberInput(
           inputDecoration: decorateTextFields(hint),
           onInputChanged: (PhoneNumber number) =>
-          _internationalPhoneNumber = number,
+              _internationalPhoneNumber = number,
           validator: (value) =>
-          value!.isEmpty ? 'Please enter your phone number.' : null,
+              value!.isEmpty ? 'Please enter your phone number.' : null,
           onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
         ),
-        SizedBox(height: 10.0,)
+        SizedBox(
+          height: 10.0,
+        )
       ],
     );
   }
@@ -187,12 +194,8 @@ class _SignUpPageState extends State<SignUpPage> {
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
-          print('Sign Up pressed with:');
-          print('Full Name: $_fullName');
-          print('Phone Number: $_phoneNumber');
-          print('Email: $_email');
-          print('Password: $_password');
         }
+        Navigator.of(context).pushNamed('login_with_phone');
       },
       child: Text(
         "Sign Up",
@@ -213,15 +216,15 @@ class _SignUpPageState extends State<SignUpPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already have an account?'
-        ,style: GoogleFonts.poppins()),
+        Text('Already have an account?', style: GoogleFonts.poppins()),
         SizedBox(width: 5.0),
         TextButton(
-          onPressed: () => print('Log In pressed'),
-          child: Text('Log In',
-          style: GoogleFonts.poppins(
-            textStyle: TextStyle(color: Colors.blue)
-          ),),
+          onPressed: () => Navigator.of(context).pushNamed('login_with_phone'),
+          child: Text(
+            'Log In',
+            style:
+                GoogleFonts.poppins(textStyle: TextStyle(color: Colors.blue)),
+          ),
         ),
       ],
     );
@@ -234,33 +237,42 @@ class _SignUpPageState extends State<SignUpPage> {
               fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black87),
         ));
   }
+
   InputDecoration decorateTextFields(String hint) {
     return InputDecoration(
         hintText: hint,
-        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        contentPadding: EdgeInsets.symmetric(vertical: 17, horizontal: 10),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff9E9E9E),
           ),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blueAccent),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-
-        suffixIcon: hint == "enter your password" ? IconButton(
-        icon: Icon(_showPassword ? Icons.visibility_off : Icons.visibility),
-        onPressed: () => setState(() => _showPassword = !_showPassword),
-        ): null
-    );
+        suffixIcon: hint == "enter your password"
+            ? IconButton(
+                icon: Icon(
+                    _showPassword ? Icons.visibility : Icons.visibility_off),
+                onPressed: () => setState(() => _showPassword = !_showPassword),
+              )
+            : null);
   }
-  Widget inputField({label,textField}) {
+
+  Widget inputField({label, textField}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         labelTextFields(label),
-        SizedBox(height: 5,),
+        SizedBox(
+          height: 5,
+        ),
         textField,
-        SizedBox(height: 10,)
+        SizedBox(
+          height: 10,
+        )
       ],
     );
   }
