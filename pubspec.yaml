@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   intl_phone_number_input: ^0.7.4
   url_launcher: ^6.2.6
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,31 @@ flutter:
     - assets/house1.jpg
     - assets/house2.jpg
     - assets/house3.jpg
+    - assets/filter-icon.png
+    - assets/Vector.png
+    - assets/Show.png
+    - assets/Show - Active.png
+    - assets/Shape.png
+    - assets/Shape (1).png
+    - assets/image.png
+    - assets/Favorite - Active - Big.png
+    - assets/Filter.png
+    - assets/Gallery - Small2.png
+    - assets/Gallery - Small.png
+    - assets/Gallery - Small - Counter.png
+    - assets/Category - Wide.png
+    - assets/Star - Tag.png
+    - assets/Location.png
+    - assets/Layout2.png
+    - assets/Layout.png
+    - assets/Ellipse.png
+    - assets/Chat.png
+    - assets/mdi_bed-empty.png
+    - assets/cil_bathroom.png
+    - assets/iconoir_pin-alt.png
+    - assets/iconoir_pin-alt2.png
+    - assets/iconoir_nav-arrow-down.png
+    - assets/Layout3.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
