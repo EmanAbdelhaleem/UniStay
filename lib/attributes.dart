@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 
 class appColors {
@@ -28,14 +29,14 @@ class appSizes{
 
 
 
-// main(){
-//   runApp(Myapp());
-// }
+/*void main(){
+  runApp(ٍSP());
+}*/
 
 class SP extends StatelessWidget{
 
-  double screen_width = 0;
-  double screen_height = 0;
+  double screen_width = 411.42857142857144;
+  double screen_height = 843.4285714285714;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,5 @@ class SP extends StatelessWidget{
     return Container(
     );
   }
-
 
 }
