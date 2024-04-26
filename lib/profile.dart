@@ -4,6 +4,7 @@ import 'package:flutter_application_1/attributes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -32,12 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
   int _listings = 0;
   int _sold = 0;
   int _available = 0;
-  double _screenWidth = 0;
+
   int _nTransactions = items.length;
 
   @override
   Widget build(BuildContext context) {
-    _screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -64,13 +65,13 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildProfilePhoto(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildStatisticRow(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildTransListReviews(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildGridTitle(_nTransactions, 'Transactions'),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: _buildGridOfItems(),
@@ -79,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: appSizes.calcH(70),
         color: Color(appColors.blueColor),
         child: FooterIcons(
           onCategorySelected: (int) {},
@@ -189,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildContainer(int num, String text) {
     return Container(
-      width: _screenWidth / 4,
+      width: SP().screen_width / 4,
       padding: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         border: Border.all(
@@ -231,7 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildGridTitle(int number, String text) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
+      padding: EdgeInsets.only(left: appSizes.calcW(20.0)),
       child: Row(
         children: [
           Text(
@@ -308,13 +309,13 @@ class ClickableButtonRow extends StatefulWidget {
 
 class _ClickableButtonRowState extends State<ClickableButtonRow> {
   int _selectedIndex = -1;
-  double _screenWidth = 0;
+
   double _rowWidth = 0;
 
   @override
   Widget build(BuildContext context) {
-    _screenWidth = MediaQuery.of(context).size.width;
-    _rowWidth = _screenWidth - 20;
+
+    _rowWidth = SP().screen_width - appSizes.calcW(20);
     return Container(
       width: _rowWidth,
       padding: EdgeInsets.all(5.0),
@@ -385,10 +386,10 @@ class ItemCard extends StatefulWidget {
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
-    double cardHeight = MediaQuery.of(context).size.height / 4;
+    double cardHeight = SP().screen_height / 4;
 
     return Container(
-      width: MediaQuery.of(context).size.width / 2 - 20,
+      width: SP().screen_width / 2 - appSizes.calcW(20),
       height: cardHeight,
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -415,8 +416,8 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                 ),
                 Positioned(
-                  top: 10.0,
-                  right: 10.0,
+                  top: appSizes.calcH(10.0),
+                  right: appSizes.calcW(10.0),
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: IconButton(
@@ -435,8 +436,8 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                 ),
                 Positioned(
-                  bottom: 10.0,
-                  right: 10.0,
+                  bottom: appSizes.calcH(10.0),
+                  right: appSizes.calcW(10.0),
                   child: TextButton(
                     onPressed: () {},
                     child: Text('Rent'),
@@ -449,7 +450,7 @@ class _ItemCardState extends State<ItemCard> {
                 ),
               ],
             ),
-            SizedBox(height: 5.0),
+            SizedBox(height: appSizes.calcH(5.0)),
             Text(
               widget.title,
               style: GoogleFonts.poppins(

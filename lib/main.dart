@@ -6,6 +6,8 @@ import 'package:flutter_application_1/signUp.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_application_1/attributes.dart';
+
 
 import 'EditProfile.dart';
 import 'FavouritePage.dart';
@@ -53,7 +55,7 @@ Widget buildPage(String imagePath, String title, String subtitle,
             ),
             if (isLastPage) ...[
               Padding(
-                  padding: EdgeInsets.only(top: 50.0),
+                  padding: EdgeInsets.only(top: appSizes.calcH(50.0)),
                   child: Row(
                     //crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -108,8 +110,8 @@ Widget buildPage(String imagePath, String title, String subtitle,
       ),
       if (!isLastPage) ...[
         Positioned(
-          top: 120.0,
-          right: 25.0,
+          top: appSizes.calcH(120.0),
+          right: appSizes.calcW(25.0),
           child: Builder(builder: (context) {
             return FloatingActionButton.extended(
               onPressed: () {

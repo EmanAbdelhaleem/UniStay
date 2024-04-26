@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/attributes.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,35 +24,35 @@ Widget image_part() {
       Stack(
         children: [
           Container(
-              width: double.infinity, // Ensures full width
-              height: 500,
+              width: double.infinity,
+              height: appSizes.calcH(500),
               child: Image.asset(
-                'assets/image8.png', // Replace with your image path
-                fit: BoxFit.cover, // Maintains aspect ratio while covering
+                'assets/image8.png',
+                fit: BoxFit.cover,
               )),
           Container(
-            width: double.infinity, // Ensures full width
-            height: 500,
+            width: double.infinity,
+            height: appSizes.calcH(500),
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(.4), // Blue color with 30% opacity
+              color: Colors.blue.withOpacity(.4),
             ),
           )
         ],
       ),
       // Foreground image with positioning
       Positioned(
-        top: 100,
-        left: 130,
+        top: appSizes.calcH(100),
+        left: appSizes.calcW(130),
         child: Image.asset(
           'assets/logo1.png',
         ),
       ),
 
       Positioned(
-        top: 110,
+        top: appSizes.calcH(110),
         child: Container(
-          width: 420,
-          height: 200,
+          width: appSizes.calcW(420),
+          height: appSizes.calcH(200),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -85,12 +86,12 @@ class HomePage extends StatelessWidget {
         body: Stack(children: [
       image_part(),
       Positioned.fill(
-        top: 400,
+        top: appSizes.calcH(400),
         bottom: 0.0,
         left: 0.0,
         right: 0.0,
         child: Container(
-          height: 500,
+          height: appSizes.calcH(500),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -100,28 +101,28 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsetsDirectional.all(10),
               child: Column(
                 children: [
-                  SizedBox(height: 50),
+                  SizedBox(height: appSizes.calcH(50)),
                   LoginButton(
                     icon: Icons.mobile_friendly,
                     text: 'login with mobile number',
                     back_color: 0xFF000000,
                     font_color: 0xFFFFFFFF,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: appSizes.calcH(40)),
                   LoginButton(
                     icon: Icons.mail_outline_outlined,
                     text: 'login with Google',
                     back_color: 0xFFFFFFFF,
                     font_color: 0xFF000000,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: appSizes.calcH(40)),
                   LoginButton(
                     icon: Icons.facebook_rounded,
                     text: 'login with Facebook',
                     back_color: 0xFFFFFFFF,
                     font_color: 0xFF000000,
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: appSizes.calcH(30)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

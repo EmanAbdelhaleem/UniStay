@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application_1/attributes.dart';
+import 'package:flutter_application_1/signUp.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -39,20 +42,20 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _BuildGobackIcon(),
-              SizedBox(height: 10.0),
+              SizedBox(height: appSizes.calcH(10.0)),
               _buildLoginWithText(),
-              SizedBox(height: 10.0),
+              SizedBox(height: appSizes.calcH(10.0)),
               _buildPhoneNumberText(), // Check image size
-              SizedBox(height: 13.0),
+              SizedBox(height: appSizes.calcH(13.0)),
               _buildCorrectionText(),
-              SizedBox(height: 13.0),
+              SizedBox(height: appSizes.calcH(13.0)),
               Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildPhoneNumberField("Phone Number"),
-                      SizedBox(height: 200.0),
+                      SizedBox(height: appSizes.calcH(200.0)),
                       _BuildLoginButton()
                     ],
                   )),
@@ -108,9 +111,9 @@ class _LoginPageState extends State<LoginPage> {
     return InternationalPhoneNumberInput(
       inputDecoration: decorateTextFields(hint),
       onInputChanged: (PhoneNumber number) =>
-          _internationalPhoneNumber = number,
+      _internationalPhoneNumber = number,
       validator: (value) =>
-          value!.isEmpty ? 'Please enter your phone number.' : null,
+      value!.isEmpty ? 'Please enter your phone number.' : null,
       onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
     );
   }
@@ -152,4 +155,5 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(10.0)),
     );
   }
+
 }

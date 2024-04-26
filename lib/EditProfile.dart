@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/attributes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_application_1/profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,6 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
-  double _screenWidth = 0;
   String _name = 'Ayman Haleem';
   String _email = 'emanabdelhaleem4@gmail.com';
   String? _phoneNumber = '+201188930288';
@@ -34,7 +34,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    _screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -59,12 +59,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildProfilePhoto(),
-          SizedBox(height: 20),
+          SizedBox(height: appSizes.calcH(20)),
           BuildEditProfileForm(),
         ],
       )),
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: appSizes.calcH(70),
         color: Color(appColors.blueColor),
         child: FooterIcons(
           onCategorySelected: (int) {},
@@ -180,13 +180,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNameField(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildPhoneField(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildEmailField(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildFacebookField(),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             _buildSaveButton(),
           ],
         ),
@@ -214,49 +214,5 @@ class _EditProfilePageState extends State<EditProfilePage> {
         suffixIcon: Icon(
           iconType,
         ));
-  }
-}
-
-class FooterIcons extends StatefulWidget {
-  final Function(int) onCategorySelected;
-  const FooterIcons({required this.onCategorySelected});
-
-  @override
-  _FooterIconsState createState() => _FooterIconsState();
-}
-
-class _FooterIconsState extends State<FooterIcons> {
-  int _selectedIndex = -1;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        FooterIcon(0, icon: Icons.home),
-        FooterIcon(1, icon: Icons.favorite),
-        FooterIcon(2, icon: Icons.search),
-        FooterIcon(3, icon: Icons.chat),
-        FooterIcon(4, icon: Icons.account_circle),
-      ],
-    );
-  }
-
-  Widget FooterIcon(int index, {icon}) {
-    return IconButton(
-        onPressed: () {
-          setState(() {
-            _selectedIndex = index;
-            widget.onCategorySelected(_selectedIndex);
-          });
-          if (icon == Icons.favorite)
-            Navigator.of(context).pushNamed('favourite');
-          else if (icon == Icons.account_circle)
-            Navigator.of(context).pushNamed('profile');
-          else
-            ;
-        },
-        icon: Icon(icon,
-            color: _selectedIndex == index ? Colors.white : Colors.grey[400],
-            size: 39));
   }
 }

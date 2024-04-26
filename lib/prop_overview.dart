@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore, unnecessary_import
+import 'dart:html';
+
 import 'package:flutter_application_1/attributes.dart';
+import 'package:flutter_application_1/profile.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -12,265 +15,45 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // const MyApp({super.key});
-  double screen_width = 0;
+
   double needed_width = 0;
-  double screen_height = 0;
   double half_height = 0;
   double needed_height = 0;
   @override
   Widget build(BuildContext context) {
-    screen_width = MediaQuery.of(context).size.width;
-    needed_width = (screen_width / 3) * 2;
-    screen_height = MediaQuery.of(context).size.height;
-    half_height = screen_height / 2;
+    needed_width = (SP().screen_width / 3) * 2;
+    half_height = SP().screen_height / 2;
     needed_height = half_height / 3 * 2;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Image.asset(
-                      'assets/image.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    top: 10.0,
-                    left: 10.0,
-                    child: BackButton(
-                      color: Colors.black,
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    left: needed_width - 20,
-                    top: 20.0,
-                    child: IconButton(
-                      icon: Image.asset(
-                        'assets/Filter.png',
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    left: needed_width + 30,
-                    top: 10.0,
-                    child: IconButton(
-                      icon: Image.asset('assets/Favorite - Active - Big.png'),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: needed_height,
-                    left: needed_width + 48,
-                    child: IconButton(
-                      icon: Image.asset('assets/Gallery - Small.png'),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: needed_height + 70,
-                    left: needed_width + 48,
-                    child: IconButton(
-                      icon: Image.asset('assets/Gallery - Small2.png'),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: needed_height + 140,
-                    left: needed_width + 48,
-                    child: IconButton(
-                      icon: Image.asset('assets/Gallery - Small - Counter.png'),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: half_height + 15,
-                    left: 20.0,
-                    child: IconButton(
-                      icon: Image.asset('assets/Star - Tag.png'),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: half_height + 15,
-                    left: 125.0,
-                    child: IconButton(
-                      icon: Image.asset('assets/Category - Wide.png'),
-                      onPressed: () {},
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                  ),
-                  Image.asset('assets/Location.png'),
-                  Text('Cairo,Egypt',
-                      style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey[600],
-                        ),
-                      )),
-                  Spacer(),
-                  Padding(
-                    padding: EdgeInsets.only(right: 10.0),
-                    child: Text(
-                      'per month',
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.grey[600],
-                          ),
-                        )
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              SizedBox(
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Image.asset('assets/Layout.png'),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset('assets/Layout2.png'))
-                  ],
-                ),
-              ),
+              _BuildPhotoPart(),
+              _BuildLocationtextRow(),
+              SizedBox(height: appSizes.calcH(10.0),),
+              _BuildRentBuyButtons(),
               Divider(
                 color: Colors.grey[200],
                 thickness: 1.0,
               ),
-              SizedBox(height: 10.0),
-              Container(
-                //padding: EdgeInsets.all(30.0),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(0xFF25B4F8),
-                    ),
-                    borderRadius: BorderRadius.circular(18.0)),
-                width: screen_width*9/10,
-                height: 85.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(padding: EdgeInsets.only(left: 20.0)),
-                    Image.asset('assets/Ellipse.png'),
-                    SizedBox(
-                      width: 40.0,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Anderson',
-                          style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16.0,
-                              color: Color(0xFF252B5C)),
-                        ),
-                        Text(
-                          'Real Estate Agent',
-                          style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontSize: 11.0,
-                              color: Color(0xFF53587A)),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: IconButton(
-                        icon: Image.asset('assets/Chat.png'),
-                        onPressed: () {},
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              SizedBox(height: appSizes.calcH(10.0)),
+              _BuildStateAgentCard(),
+              _BuildAttributesRow(),
               Padding(
-                padding: EdgeInsets.all(40.0),
-                child: Row(
-                  children: <Widget>[
-                    Image.asset('assets/mdi_bed-empty.png'),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      '2 Bedroom',
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 100.0,
-                    ),
-                    Image.asset('assets/cil_bathroom.png'),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      '1 Bathroom',
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 20.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      'Location & Public Facilities',
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 21.0,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
+                padding: EdgeInsets.only(left: appSizes.calcW(20.0)),
+                child: BuildText(text: 'Location & Public Facilities', size: 21.0, weight:FontWeight.w700 ),
               ),
               Padding(
                 padding: EdgeInsets.all(25.0),
                 child: Row(
                   children: <Widget>[
                     Image.asset('assets/iconoir_pin-alt.png'),
-                    SizedBox(
-                      width: 30.0,
-                    ),
-                    Text(
-                      'Cairo, Egypt',
-                      style: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 16.0,
-                          color: Colors.grey),
-                    )
+                    SizedBox(width: appSizes.calcW(30.0),),
+                    BuildText(text: 'Cairo, Egypt', size: 16.0, color: Colors.grey),
+
                   ],
                 ),
               ),
@@ -278,8 +61,8 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: 70.0,
-                    width: screen_width*9/10,
+                    height: appSizes.calcH(70.0),
+                    width: SP().screen_width*9/10,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25.0),
                       border: Border.all(
@@ -289,11 +72,11 @@ class MyApp extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.only(left: 15.0),
+                          padding: EdgeInsets.only(left: appSizes.calcW(15.0)),
                           child: Image.asset('assets/iconoir_pin-alt2.png'),
                         ),
                         SizedBox(
-                          width: 30.0,
+                          width: appSizes.calcW(30.0),
                         ),
                         Text(
                           '2.5 km',
@@ -313,7 +96,7 @@ class MyApp extends StatelessWidget {
                         ),
                         Spacer(),
                         Padding(
-                          padding: EdgeInsets.only(right: 15.0),
+                          padding: EdgeInsets.only(right: appSizes.calcW(15.0)),
                           child: Image.asset(
                               'assets/iconoir_nav-arrow-down.png'),
                         )
@@ -330,11 +113,11 @@ class MyApp extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           color: Color(appColors.likeWhite),
-                        borderRadius: BorderRadius.circular(50)
+                          borderRadius: BorderRadius.circular(50)
                       ),
                       padding: EdgeInsets.all(15.0),
-                      height: 50.0,
-                      width: screen_width/4+10,
+                      height: appSizes.calcH(50.0),
+                      width: SP().screen_width/4+appSizes.calcW(10),
                       child: Text(
                         '2 Hospitals',
                         textAlign: TextAlign.center,
@@ -350,8 +133,8 @@ class MyApp extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50)
                       ),
                       padding: EdgeInsets.all(15.0),
-                      height: 50.0,
-                      width: screen_width/4+30,
+                      height: appSizes.calcH(50.0),
+                      width: SP().screen_width/4+appSizes.calcW(30),
                       child: Text(
                         '4 Gas stations',
                         textAlign: TextAlign.center,
@@ -367,8 +150,8 @@ class MyApp extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50)
                       ),
                       padding: EdgeInsets.all(15.0),
-                      height: 50.0,
-                      width: screen_width/4+10,
+                      height: appSizes.calcH(50.0),
+                      width: SP().screen_width/4+appSizes.calcW(10),
                       child: Text(
                         '2 Schools',
                         textAlign: TextAlign.center,
@@ -384,13 +167,14 @@ class MyApp extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: SP().screen_width,
                   child: Image.asset(
                     'assets/Layout3.png',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Row(
@@ -423,8 +207,8 @@ class MyApp extends StatelessWidget {
                       color: Color(0xFF25B4F8),
                     ),
                     borderRadius: BorderRadius.circular(18.0)),
-                width: screen_width*9/10,
-                height: 85.0,
+                width: SP().screen_width*9/10,
+                height: appSizes.calcH(85.0),
                 child: Padding(
                   padding: EdgeInsets.all(18.0),
                   child: Column(
@@ -468,8 +252,8 @@ class MyApp extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(30.0),
                 child: Container(
-                  height: 63.0,
-                  width: screen_width*7/10,
+                  height: appSizes.calcH(63.0),
+                  width: SP().screen_width*7/10,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -490,14 +274,14 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: appSizes.calcH(20),),
             ],
 
           ),
 
         ),
         bottomNavigationBar: BottomAppBar(
-          height: 70,
+          height: appSizes.calcH(70),
           // ignore: prefer_const_constructors
           color: Color(0xFF1F70b5),
           child: FooterIcons(
@@ -508,45 +292,237 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
 
-class FooterIcons extends StatefulWidget {
-  final Function(int) onCategorySelected;
-  // ignore: use_key_in_widget_constructors
-  const FooterIcons({required this.onCategorySelected});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _FooterIconsState createState() => _FooterIconsState();
-}
-
-class _FooterIconsState extends State<FooterIcons> {
-  int _selectedIndex = -1;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        FooterIcon(0, icon: Icons.home),
-        FooterIcon(1, icon: Icons.favorite),
-        FooterIcon(2, icon: Icons.search),
-        FooterIcon(3, icon: Icons.chat),
-        FooterIcon(4, icon: Icons.account_circle),
+  Widget _BuildPhotoPart(){
+    return Stack(
+      children: <Widget>[
+        SizedBox(
+          width: SP().screen_width,
+          child: Image.asset(
+            'assets/image.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(
+          top: appSizes.calcH(10.0),
+          left: appSizes.calcW(10.0),
+          child: BackButton(
+            color: Colors.black,
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          left: needed_width - appSizes.calcW(20),
+          top: appSizes.calcH(20.0),
+          child: IconButton(
+            icon: Image.asset(
+              'assets/Filter.png',
+            ),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          left: needed_width + appSizes.calcW(30),
+          top: appSizes.calcH(10.0),
+          child: IconButton(
+            icon: Image.asset('assets/Favorite - Active - Big.png'),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          top: needed_height,
+          left: needed_width + appSizes.calcW(48),
+          child: IconButton(
+            icon: Image.asset('assets/Gallery - Small.png'),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          top: needed_height + appSizes.calcH(70),
+          left: needed_width + appSizes.calcW(48),
+          child: IconButton(
+            icon: Image.asset('assets/Gallery - Small2.png'),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          top: needed_height + appSizes.calcH(140),
+          left: needed_width + appSizes.calcW(48),
+          child: IconButton(
+            icon: Image.asset('assets/Gallery - Small - Counter.png'),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          top: half_height + appSizes.calcH(15),
+          left: appSizes.calcW(20.0),
+          child: IconButton(
+            icon: Image.asset('assets/Star - Tag.png'),
+            onPressed: () {},
+          ),
+        ),
+        Positioned(
+          top: half_height + appSizes.calcH(15),
+          left: appSizes.calcW(125.0),
+          child: IconButton(
+            icon: Image.asset('assets/Category - Wide.png'),
+            onPressed: () {},
+          ),
+        )
       ],
     );
   }
 
-  // ignore: non_constant_identifier_names
-  Widget FooterIcon(int index, {icon}) {
-    return IconButton(
-        onPressed: () {
-          setState(() {
-            _selectedIndex = index;
-            widget.onCategorySelected(_selectedIndex);
-          });
-        },
-        icon: Icon(icon,
-            color: _selectedIndex == index ? Colors.white : Colors.grey[400],
-            size: 39));
+  Widget _BuildLocationtextRow(){
+    return Row(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: appSizes.calcW(10.0)),
+        ),
+        Image.asset('assets/Location.png'),
+        Text('Cairo,Egypt',
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                fontSize: 12.0,
+                color: Colors.grey[600],
+              ),
+            )),
+        Spacer(),
+        Padding(
+          padding: EdgeInsets.only(right: appSizes.calcW(10.0)),
+          child: Text(
+              'per month',
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.grey[600],
+                ),
+              )
+          ),
+        )
+      ],
+    );
   }
+
+  Widget _BuildRentBuyButtons(){
+    return SizedBox(
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Image.asset('assets/Layout.png'),
+            onPressed: () {},
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: Image.asset('assets/Layout2.png'))
+        ],
+      ),
+    );
+  }
+
+  Widget _BuildStateAgentCard(){
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Color(0xFF25B4F8),
+          ),
+          borderRadius: BorderRadius.circular(18.0)),
+      width: SP().screen_width*9/10,
+      height: appSizes.calcH(85.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(left: appSizes.calcW(20.0))),
+          Image.asset('assets/Ellipse.png'),
+          SizedBox(
+            width: appSizes.calcW(40.0),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Anderson',
+                style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16.0,
+                    color: Color(0xFF252B5C)),
+              ),
+              Text(
+                'Real Estate Agent',
+                style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 11.0,
+                    color: Color(0xFF53587A)),
+              ),
+            ],
+          ),
+          Spacer(),
+          Padding(
+            padding: EdgeInsets.only(right: appSizes.calcW(20.0)),
+            child: IconButton(
+              icon: Image.asset('assets/Chat.png'),
+              onPressed: () {},
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _BuildAttributesRow(){
+    return Padding(
+      padding: EdgeInsets.all(40.0),
+      child: Row(
+        children: <Widget>[
+          Image.asset('assets/mdi_bed-empty.png'),
+          SizedBox(
+            width: appSizes.calcW(10.0),
+          ),
+          Text(
+            '2 Bedroom',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          ),
+          SizedBox(
+            width: appSizes.calcW(100.0),
+          ),
+          Image.asset('assets/cil_bathroom.png'),
+          SizedBox(
+            width: appSizes.calcW(10.0),
+          ),
+          Text(
+            '1 Bathroom',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget BuildText({text, size = 14.0, color = null, weight = FontWeight.normal}){
+    return text(
+      text,
+      style: GoogleFonts.poppins(
+        textStyle: TextStyle(
+          color: color,
+          fontSize: size,
+          fontWeight: weight
+        )
+      )
+    );
+  }
+
+
 }
+

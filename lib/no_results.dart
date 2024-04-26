@@ -1,6 +1,8 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/attributes.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -30,14 +32,14 @@ class MyApp extends StatelessWidget {
               ),
               actions: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(top: 32.0, left: 286.0),
-                  width: 50.0,
-                  height: 50.0,
+                  padding: EdgeInsets.only(top: appSizes.calcH(32.0), left: appSizes.calcW(286.0)),
+                  width: appSizes.calcW(50.0),
+                  height: appSizes.calcH(50.0),
                   child: IconButton(
                     icon: Image.asset(
                       'assets/filter-icon.png',
-                      width: 20.0,
-                      height: 20.0,
+                      width: appSizes.calcW(20.0),
+                      height: (20.0),
                     ),
                     onPressed: () {
                       //empty
@@ -47,8 +49,8 @@ class MyApp extends StatelessWidget {
                 IconButton(
                   icon: Image.asset(
                     'assets/filter-icon.png',
-                    width: 20.0,
-                    height: 20.0,
+                    width: appSizes.calcW(20.0),
+                    height: (20.0),
                   ),
                   onPressed: () {
                     //empty
@@ -61,8 +63,8 @@ class MyApp extends StatelessWidget {
               // ignore: prefer_const_literals_to_create_immutables
               children: <Widget>[
                 SizedBox(
-                  width: 500.0,
-                  height: 70.0,
+                  width: appSizes.calcW(500.0),
+                  height: appSizes.calcH(70.0),
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: TextField(
@@ -92,11 +94,11 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: appSizes.calcH(20.0)),
                 Container(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                      padding: EdgeInsets.only(left: 14.0),
+                      padding: EdgeInsets.only(left: appSizes.calcW(14.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -177,7 +179,7 @@ class MyApp extends StatelessWidget {
           ),
 
           Padding(
-              padding: EdgeInsets.only(top: 500.0),
+              padding: EdgeInsets.only(top: appSizes.calcH(500.0)),
               // ignore: prefer_const_literals_to_create_immutables
               child: Column(
                 // ignore: prefer_const_literals_to_create_immutables
@@ -196,7 +198,7 @@ class MyApp extends StatelessWidget {
                             color: Colors.black),
                       ),
                       SizedBox(
-                        width: 5.0,
+                        width: appSizes.calcW(5.0),
                       ),
                       Text(
                         'not found',
@@ -210,7 +212,7 @@ class MyApp extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 30.0,
+                    height: appSizes.calcH(30.0),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

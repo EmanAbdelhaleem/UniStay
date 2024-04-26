@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application_1/attributes.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -44,13 +46,13 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10.0),
+              SizedBox(height: appSizes.calcH(10.0)),
               _buildWelcomeText(),
-              SizedBox(height: 10.0),
+              SizedBox(height: appSizes.calcH(10.0)),
               _buildLogoImage(),
-              SizedBox(height: 20.0),
+              SizedBox(height: appSizes.calcH(20.0)),
               _buildCreateAccountText(),
-              SizedBox(height: 20.0),
+              SizedBox(height: appSizes.calcH(20.0)),
               _buildForm(),
             ],
           ),
@@ -90,21 +92,21 @@ class _SignUpPageState extends State<SignUpPage> {
           inputField(
               label: "Full Name",
               textField: _buildFullNameField("Eman Abdehaleem")),
-          SizedBox(height: 10.0),
-          _buildPhoneNumberField("Phone number"),
-          SizedBox(height: 10.0),
+          SizedBox(height: appSizes.calcH(10.0)),
+          _buildSignUpPhoneNumberField("Phone number"),
+          SizedBox(height: appSizes.calcH(10.0)),
           inputField(
               label: "Email",
               textField: _buildEmailField("emanabdelhaleem@gmail.com")),
-          SizedBox(height: 10.0),
+          SizedBox(height: appSizes.calcH(10.0)),
           inputField(
               label: "Password",
               textField: _buildPasswordTextField("enter your password")),
-          SizedBox(height: 5.0),
+          SizedBox(height: appSizes.calcH(5.0)),
           _buildTermsCheckbox(),
-          SizedBox(height: 20.0),
+          SizedBox(height: appSizes.calcH(20.0)),
           _BuildSignUpButton(),
-          SizedBox(height: 20.0),
+          SizedBox(height: appSizes.calcH(20.0)),
           _buildAlreadyHaveAccountText(),
         ],
       ),
@@ -120,26 +122,24 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  Widget _buildSignUpPhoneNumberField(String hint) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      labelTextFields(hint),
+      SizedBox(
+        height: appSizes.calcH(5.0),
+      ),
+      _buildPhoneNumberField(hint),
+    ]);
+  }
+
   Widget _buildPhoneNumberField(String hint) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        labelTextFields(hint),
-        SizedBox(
-          height: 5.0,
-        ),
-        InternationalPhoneNumberInput(
-          inputDecoration: decorateTextFields(hint),
-          onInputChanged: (PhoneNumber number) =>
-              _internationalPhoneNumber = number,
-          validator: (value) =>
-              value!.isEmpty ? 'Please enter your phone number.' : null,
-          onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
-        ),
-        SizedBox(
-          height: 10.0,
-        )
-      ],
+    return InternationalPhoneNumberInput(
+      inputDecoration: decorateTextFields(hint),
+      onInputChanged: (PhoneNumber number) =>
+      _internationalPhoneNumber = number,
+      validator: (value) =>
+      value!.isEmpty ? 'Please enter your phone number.' : null,
+      onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
     );
   }
 
@@ -217,7 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('Already have an account?', style: GoogleFonts.poppins()),
-        SizedBox(width: 5.0),
+        SizedBox(width: appSizes.calcW(5.0)),
         TextButton(
           onPressed: () => Navigator.of(context).pushNamed('login_with_phone'),
           child: Text(
@@ -267,11 +267,11 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         labelTextFields(label),
         SizedBox(
-          height: 5,
+          height: appSizes.calcH(5),
         ),
         textField,
         SizedBox(
-          height: 10,
+          height: appSizes.calcH(10),
         )
       ],
     );

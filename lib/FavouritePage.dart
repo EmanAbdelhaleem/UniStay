@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/attributes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application_1/profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,12 +25,12 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
-  double _screenWidth = 0;
+
   int _Favourites = items.length;
 
   @override
   Widget build(BuildContext context) {
-    _screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -53,9 +54,9 @@ class _FavouritePageState extends State<FavouritePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 40),
+            SizedBox(height: appSizes.calcH(40)),
             _buildGridTitle(_Favourites, 'estates'),
-            SizedBox(height: 20),
+            SizedBox(height: appSizes.calcH(20)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: _buildGridOfItems(),
@@ -64,7 +65,7 @@ class _FavouritePageState extends State<FavouritePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: appSizes.calcH(70),
         color: Color(appColors.blueColor),
         child: FooterIcons(
           onCategorySelected: (int) {},
@@ -75,7 +76,7 @@ class _FavouritePageState extends State<FavouritePage> {
 
   Widget _buildGridTitle(int number, String text) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
+      padding:  EdgeInsets.only(left: appSizes.calcW(20.0)),
       child: Row(
         children: [
           Text(
@@ -96,50 +97,6 @@ class _FavouritePageState extends State<FavouritePage> {
   }
 }
 
-class FooterIcons extends StatefulWidget {
-  final Function(int) onCategorySelected;
-  const FooterIcons({required this.onCategorySelected});
-
-  @override
-  _FooterIconsState createState() => _FooterIconsState();
-}
-
-class _FooterIconsState extends State<FooterIcons> {
-  int _selectedIndex = -1;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        FooterIcon(0, icon: Icons.home),
-        FooterIcon(1, icon: Icons.favorite),
-        FooterIcon(2, icon: Icons.search),
-        FooterIcon(3, icon: Icons.chat),
-        FooterIcon(4, icon: Icons.account_circle),
-      ],
-    );
-  }
-
-  Widget FooterIcon(int index, {icon}) {
-    return IconButton(
-        onPressed: () {
-          setState(() {
-            _selectedIndex = index;
-            widget.onCategorySelected(_selectedIndex);
-          });
-
-          if (icon == Icons.favorite)
-            Navigator.of(context).pushNamed('favourite');
-          else if (icon == Icons.account_circle)
-            Navigator.of(context).pushNamed('profile');
-          else
-            ;
-        },
-        icon: Icon(icon,
-            color: _selectedIndex == index ? Colors.white : Colors.grey[400],
-            size: 39));
-  }
-}
 
 class ItemCard extends StatefulWidget {
   final String imagePath;
@@ -161,10 +118,10 @@ class ItemCard extends StatefulWidget {
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
-    double cardHeight = MediaQuery.of(context).size.height / 4;
+    double cardHeight = SP().screen_height / 4;
 
     return Container(
-      width: MediaQuery.of(context).size.width / 2 - 20,
+      width: SP().screen_width / 2 - appSizes.calcW(20),
       height: cardHeight,
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -181,7 +138,7 @@ class _ItemCardState extends State<ItemCard> {
                   borderRadius: BorderRadius.circular(20.0),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        bottom: 4.0), // Add padding to the bottom
+                        bottom: 4.0),
                     child: Image.asset(
                       widget.imagePath,
                       width: double.infinity,
@@ -191,8 +148,8 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                 ),
                 Positioned(
-                  top: 10.0,
-                  right: 10.0,
+                  top: appSizes.calcH(10.0),
+                  right: appSizes.calcW(10.0),
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: IconButton(
@@ -211,8 +168,8 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                 ),
                 Positioned(
-                  bottom: 10.0,
-                  right: 10.0,
+                  bottom: appSizes.calcH(10.0),
+                  right: appSizes.calcW(10.0),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(widget.price.toString() + '/day'),
@@ -225,7 +182,7 @@ class _ItemCardState extends State<ItemCard> {
                 ),
               ],
             ),
-            SizedBox(height: 5.0),
+            SizedBox(height: appSizes.calcH(5.0)),
             Text(
               widget.title,
               style: GoogleFonts.poppins(
