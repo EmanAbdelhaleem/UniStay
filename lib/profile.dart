@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('editProfile');
             },
           ),
         ],

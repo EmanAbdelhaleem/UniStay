@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter_application_1/attributes.dart';
 import 'package:flutter_application_1/profile.dart';
@@ -511,7 +510,7 @@ class MyApp extends StatelessWidget {
   }
 
   Widget BuildText({text, size = 14.0, color = null, weight = FontWeight.normal}){
-    return text(
+    return Text(
       text,
       style: GoogleFonts.poppins(
         textStyle: TextStyle(
