@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_1/attributes.dart';
-
+import 'package:flutter_application_1/customer.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/ProvidersFile.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +13,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: SignUpPage(),
-      ),
-    );
+    return ChangeNotifierProvider<RegisteredNumbers>(
+        create: (context) => RegisteredNumbers(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: SafeArea(
+            child: SignUpPage(),
+          ),
+        ));
   }
 }
 
@@ -136,9 +140,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return InternationalPhoneNumberInput(
       inputDecoration: decorateTextFields(hint),
       onInputChanged: (PhoneNumber number) =>
-      _internationalPhoneNumber = number,
+          _internationalPhoneNumber = number,
       validator: (value) =>
-      value!.isEmpty ? 'Please enter your phone number.' : null,
+          value!.isEmpty ? 'Please enter your phone number.' : null,
       onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
     );
   }
@@ -191,10 +195,22 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _BuildSignUpButton() {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
         }
+
+        final registeredNumbers = Provider.of<RegisteredNumbers>(context, listen: false);
+        registeredNumbers.addNumber(_phoneNumber);
+
+        // await customer().createUser(
+        //   _fullName,
+        //   _email,
+        //   _password,
+        //   _fullName, // Assuming username is same as full name for now
+        //   "", // Add logic to handle image upload if applicable
+        // );
+
         Navigator.of(context).pushNamed('login_with_phone');
       },
       child: Text(

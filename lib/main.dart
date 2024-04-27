@@ -1,34 +1,52 @@
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/no_results.dart';
 import 'package:flutter_application_1/profile.dart';
+import 'package:flutter_application_1/prop_overview.dart';
+import 'package:flutter_application_1/search.dart';
 import 'package:flutter_application_1/signUp.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_application_1/attributes.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/ProvidersFile.dart';
+import 'package:flutter_application_1/no_results.dart';
 
 
 import 'EditProfile.dart';
 import 'FavouritePage.dart';
+import 'ItemCard.dart';
 import 'login_with_phone.dart';
 
 main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: 'logoScreen',
-    routes: {
-      'logoScreen': (context) => FirstScreen(),
-      'onBoarding': (context) => SecondScreen(),
-      'login': (context) => HomePage(),
-      'signup': (context) => SignUpPage(),
-      'login_with_phone': (context) => LoginPage(),
-      'profile' : (context) => ProfilePage(),
-      'editProfile' : (context) => EditProfilePage(),
-      'favourite' : (context) => FavouritePage(),
-
-    },
-  ));
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider<RegisteredNumbers>(
+          create: (context) => RegisteredNumbers(),
+        ),
+        ChangeNotifierProvider<ItemListProvider>(
+          create: (context) => ItemListProvider(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: 'logoScreen',
+        routes: {
+          'logoScreen': (context) => FirstScreen(),
+          'onBoarding': (context) => SecondScreen(),
+          'login': (context) => HomePage(),
+          'signup': (context) => SignUpPage(),
+          'login_with_phone': (context) => LoginPage(),
+          'profile': (context) => ProfilePage(),
+          'editProfile': (context) => EditProfilePage(),
+          'favourite': (context) => FavouritePage(),
+          'search': (context) => SearchPage(),
+          'no_result': (context) => NoResultPage(),
+          'prop_overview': (context) => ItemOverview()
+        },
+      )));
 }
 
 Widget buildPage(String imagePath, String title, String subtitle,

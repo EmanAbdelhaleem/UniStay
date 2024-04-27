@@ -3,7 +3,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_1/attributes.dart';
 import 'package:flutter_application_1/signUp.dart';
-
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/ProvidersFile.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,12 +13,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider<RegisteredNumbers>(
+        create: (context) => RegisteredNumbers(),
+    child: MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: LoginPage(),
       ),
-    );
+    ));
   }
 }
 
@@ -33,6 +36,38 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final registeredNumbers = Provider.of<RegisteredNumbers>(context);
+    Widget _BuildLoginButton() {
+      return ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
+          }
+
+          if (registeredNumbers.numbers.contains(_phoneNumber)) {
+            // Login successful (navigate to profile or other page)
+            Navigator.of(context).pushNamed('profile');
+          } else {
+            // Login failed - show error message
+            print('Invalid phone number or not registered yet.');
+          }
+
+        },
+        child: Text(
+          "Login",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(color: Colors.grey), // Set button border
+          backgroundColor: Colors.blueAccent,
+          minimumSize: Size(400, 60), // Set button size
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         // Wraps entire body for scrolling
@@ -64,6 +99,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+
+
   }
 
   Widget _BuildGobackIcon() {
@@ -111,35 +148,14 @@ class _LoginPageState extends State<LoginPage> {
     return InternationalPhoneNumberInput(
       inputDecoration: decorateTextFields(hint),
       onInputChanged: (PhoneNumber number) =>
-      _internationalPhoneNumber = number,
+          _internationalPhoneNumber = number,
       validator: (value) =>
-      value!.isEmpty ? 'Please enter your phone number.' : null,
+          value!.isEmpty ? 'Please enter your phone number.' : null,
       onSaved: (PhoneNumber number) => _phoneNumber = number.phoneNumber!,
     );
   }
 
-  Widget _BuildLoginButton() {
-    return ElevatedButton(
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          _formKey.currentState!.save();
-        }
-        Navigator.of(context).pushNamed('profile');
-      },
-      child: Text(
-        "Login",
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-      style: ElevatedButton.styleFrom(
-        side: BorderSide(color: Colors.grey), // Set button border
-        backgroundColor: Colors.blueAccent,
-        minimumSize: Size(400, 60), // Set button size
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
-      ),
-    );
-  }
+
 
   InputDecoration decorateTextFields(String hint) {
     return InputDecoration(
@@ -155,5 +171,4 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(10.0)),
     );
   }
-
 }

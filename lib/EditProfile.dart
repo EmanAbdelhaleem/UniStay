@@ -48,7 +48,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed('profile');
+            },
             icon: Icon(
               Icons.arrow_back,
               size: 30,
